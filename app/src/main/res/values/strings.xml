@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">duanmau</string>
+    <string name="open"></string>
+    <string name="close"></string>
+    <string name="foget"><u>Forgot password?</u></string>
+</resources>
