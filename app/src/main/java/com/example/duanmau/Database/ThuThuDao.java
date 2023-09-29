@@ -62,8 +62,8 @@ public class ThuThuDao {
         return list.get(0);
     }
     public int checkLogin(String id, String password){
-        String sql = "SELECT * FROM ThuThu WHERE maTT = ? AND matKhau=?";
-        List<ThuThu> list = getData(sql, password);
+        String sql = "SELECT * FROM ThuThu WHERE maTT=? AND matKhau=?";
+        List<ThuThu> list = getData(sql, id ,password);
         if (list.size() == 0 ) return -1;
         return 1;
     }

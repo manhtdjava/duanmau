@@ -25,7 +25,6 @@ public class DoiMatKhauFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_doi_mat_khau, container, false);
         edtpasscu = view.findViewById(R.id.edtpasscu);
         edtpassmoi = view.findViewById(R.id.edtpassmoi);

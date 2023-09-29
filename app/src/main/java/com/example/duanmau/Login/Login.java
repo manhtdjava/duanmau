@@ -10,13 +10,13 @@ import android.widget.Toast;
 
 import com.example.duanmau.Database.ThuThuDao;
 import com.example.duanmau.MainActivity;
-import com.example.duanmau.R;
 import com.example.duanmau.databinding.ActivityLoginBinding;
 
 
 public class Login extends AppCompatActivity {
     ActivityLoginBinding binding;
    ThuThuDao thuThuDao;
+   String name, pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +26,35 @@ public class Login extends AppCompatActivity {
         thuThuDao = new ThuThuDao(this);
 
         SharedPreferences preferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        String user = preferences.getString("USERNAME", "");
+        String passw = preferences.getString("PASSWORD", "");
+        Boolean rem = preferences.getBoolean("REMEMBER", false);
 
 
-        binding.edtNamedn.setText(preferences.getString("USERNAME", ""));
-        binding.edtPassdn.setText(preferences.getString("PASS", ""));
-        binding.checkBox.setChecked( preferences.getBoolean("REMEMBER", false));
+        binding.edtNamedn.setText(user);
+        binding.edtPassdn.setText(passw);
+        binding.checkBox.setChecked(rem);
 
         binding.btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkLogin();
+                name= binding.edtNamedn.getText().toString();
+                pass = binding.edtPassdn.getText().toString();
+
+                if(name.trim().isEmpty()||pass.trim().isEmpty())
+                    Toast.makeText(Login.this, "Bạn không được để trống!", Toast.LENGTH_SHORT).show();
+                else{
+                    if(thuThuDao.checkLogin(name, pass) > 0){
+                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        remember(name, pass, binding.checkBox.isChecked());
+                        Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("user", name);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(Login.this, "Thông tin không hợp lệ!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         binding.btnsignup.setOnClickListener(new View.OnClickListener() {
@@ -53,29 +72,11 @@ public class Login extends AppCompatActivity {
             editor.clear();
         }else {
             editor.putString("USERNAME", u);
-            editor.putString("PASS", p);
+            editor.putString("PASSWORD", p);
             editor.putBoolean("REMEMBER", status);
 
         }
         editor.commit();
     }
-    public void checkLogin(){
-        String name= binding.edtNamedn.getText().toString();
-        String pass = binding.edtPassdn.getText().toString();
 
-        if(name.trim().isEmpty()||pass.trim().isEmpty())
-            Toast.makeText(Login.this, "Bạn không được để trống!", Toast.LENGTH_SHORT).show();
-        else{
-            if(thuThuDao.checkLogin(name, pass) > 0){
-                Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                remember(name, pass, binding.checkBox.isChecked());
-                Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("user", name);
-                startActivity(intent);
-                finish();
-            }else{
-                Toast.makeText(Login.this, "Thông tin không hợp lệ!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
     }

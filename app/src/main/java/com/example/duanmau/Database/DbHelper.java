@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String dbName = "PNLIB";
-    static final int dbVersion = 3;
+    static final int dbVersion = 4;
     public DbHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }
@@ -19,10 +19,8 @@ public class DbHelper extends SQLiteOpenHelper {
                         "maTT TEXT PRIMARY KEY, " +
                         "hoTen TEXT NOT NULL, " +
                         "matKhau TEXT NOT NULL)";
-        String data = "insert into ThuThu values('tt1', 'manh', '123')";
 
         db.execSQL(createTableThuThu);
-        db.execSQL(data);
         //Tao bang Thanh Vien
         String createTableThanhVien=
                 "create table ThanhVien (" +
@@ -62,7 +60,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         "soLuong INTEGER NOT NULL)";
         db.execSQL(createTableTop);
 
-//        db.execSQL(DataSqlite.INSERT_THU_THU);
+        db.execSQL(DataSqlite.INSERT_THU_THU);
     }
 
     @Override
@@ -81,6 +79,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL(dropTableLoaiSach);
             db.execSQL(dropTableLoaiLoaiSach);
             db.execSQL(dropTableLoaiTop);
+
             onCreate(db);
         }
     }
