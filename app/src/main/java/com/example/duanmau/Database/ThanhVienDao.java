@@ -12,52 +12,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThanhVienDao {
-    private SQLiteDatabase db;
+   DbHelper dbHelper;
 
     public ThanhVienDao(Context context){
-        DbHelper dbHelper = new DbHelper(context);
-        db = dbHelper.getWritableDatabase();
+         dbHelper = new DbHelper(context);
     }
-    public long insert(ThanhVien obj){
-        ContentValues values = new ContentValues();
-        values.put("hoTen", obj.getHoTenTV());
-        values.put("namSinh", obj.getNamSinh());
-        return db.insert("ThanhVien", null, values);
-    }
-    public int update(ThanhVien obj){
-        ContentValues values = new ContentValues();
-        values.put("hoTen", obj.getHoTenTV());
-        values.put("namSinh", obj.getNamSinh());
-        return db.update("ThanhVien", values, "maTV=?", new String[]{String.valueOf(obj.getMaTV())});
-    }
-    public int delete(String id){
-        return db.delete("ThanhVien", "maTV=?", new String[]{id});
-    }
-
-    @SuppressLint("Range")
-    public List<ThanhVien> getData(String sql, String...selectionArgs){
+    public List<ThanhVien> getDSThanhVien(){
         List<ThanhVien> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery(sql, selectionArgs);
-        while (cursor.moveToNext()){
-            ThanhVien obj = new ThanhVien();
-            obj.setMaTV(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maTV"))));
-            obj.setHoTenTV(cursor.getString(cursor.getColumnIndex("hoTen")));
-            obj.setNamSinh(cursor.getString(cursor.getColumnIndex("namSinh")));
-
-            list.add(obj);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from ThanhVien",null);
+        if(cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                list.add(new ThanhVien(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
+            }while (cursor.moveToNext());
         }
         return list;
     }
-    // get tat ca data
-    public List<ThanhVien> getAll(){
-        String sql = "SELECT * FROM ThanhVien";
-        return getData(sql);
+
+    public boolean insert(String hoten, String namsinh){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hoTen", hoten);
+        values.put("namSinh",namsinh);
+        long check = db.insert("ThanhVien",null, values);
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    //get daât theo id
-    public ThanhVien getID (String id){
-        String sql = "SELECT * FROM ThanhVien WHERE maTV = ?";
-        List<ThanhVien> list = getData(sql, id);
-        return list.get(0);
+
+    public boolean update(int matv,String hoten, String namsinh){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hoTen",hoten);
+        values.put("namSinh",namsinh);
+        long check = db.update("ThanhVien",values,"maTV = ?",new String[]{String.valueOf(matv)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public int delete(int matv){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from PhieuMuon where maTV = ?",new String[]{String.valueOf(matv)});
+        if(cursor.getCount() != 0){
+            return  -1;
+        }
+
+        long check = db.delete("ThanhVien","maTV = ?",new String[]{String.valueOf(matv)});
+        if(check == -1){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
 }
