@@ -19,22 +19,41 @@ public class SachDao {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
-    public long insert(Sach obj){
+    public boolean insert(String tensach, int tienthue, int maloai){
         ContentValues values = new ContentValues();
-        values.put("tenSach", obj.getTenSach());
-        values.put("giaThue", obj.getGiaThue());
-        values.put("maLoai", obj.getMaLoai());
-        return db.insert("Sach", null, values);
+        values.put("tenSach",tensach);
+        values.put("giaThue",tienthue);
+        values.put("maLoai",maloai);
+        long check = db.insert("Sach",null,values);
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int updatel(Sach obj){
+    public boolean update(int masach, String tensach, int giathue, int maloai){
         ContentValues values = new ContentValues();
-        values.put("tenSach", obj.getTenSach());
-        values.put("giaThue", obj.getGiaThue());
-        values.put("maLoai", obj.getMaLoai());
-        return db.update("Sach", values, "maSach=?", new String[]{String.valueOf(obj.getmSach())});
+        values.put("tenSach",tensach);
+        values.put("giaThue",giathue);
+        values.put("maLoai",maloai);
+        long check = db.update("Sach",values,"maSach = ?", new String[]{String.valueOf(masach)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int delete(String id){
-        return db.delete("Sach", "maSach=?", new String[]{id});
+    public int delete(int masach){
+        Cursor cursor = db.rawQuery("select * from PhieuMuon where maSach = ?",new String[]{String.valueOf(masach)});
+        if(cursor.getCount() != 0){
+            return -1;
+        }
+        long check = db.delete("Sach","masach = ?", new String[]{String.valueOf(masach)});
+        if(check == -1){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
     @SuppressLint("Range")

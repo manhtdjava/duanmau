@@ -31,7 +31,7 @@ public class ThanhVienFragment extends Fragment {
     RecyclerView rcyThanhVien;
     List<ThanhVien> list;
     ThanhVienAdapter adapter;
-    static ThanhVienDao thanhVienDao;
+    ThanhVienDao thanhVienDao;
     FloatingActionButton fab;
 
     @Override
@@ -57,7 +57,7 @@ public class ThanhVienFragment extends Fragment {
         list = thanhVienDao.getDSThanhVien();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcyThanhVien.setLayoutManager(linearLayoutManager);
-        adapter = new ThanhVienAdapter(getContext());
+        adapter = new ThanhVienAdapter(getContext(), list);
         rcyThanhVien.setAdapter(adapter);
 
     }

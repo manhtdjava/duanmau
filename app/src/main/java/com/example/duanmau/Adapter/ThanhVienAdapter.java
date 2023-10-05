@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,27 +33,27 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     private List<ThanhVien> list;
     ThanhVienDao thanhVienDao;
 
-    public ThanhVienAdapter(Context context) {
+    public ThanhVienAdapter(Context context, List<ThanhVien> list) {
         this.context = context;
+        this.list = list;
         thanhVienDao = new ThanhVienDao(context);
-        this.list = thanhVienDao.getDSThanhVien();
     }
 
     @NonNull
     @Override
     public ThanhVienViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_thanh_vien, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_thanhvien, parent, false);
         return new ThanhVienViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ThanhVienViewHolder holder, int position) {
         ThanhVien thanhVien = list.get(position);
-        holder.txtmaTV.setText("Mã TV: "+thanhVien.getMaTV());
-        holder.txttenTV.setText("Tên TV "+thanhVien.getHoTenTV());
-        holder.txtnamSinh.setText("Năm sinh: "+thanhVien.getNamSinh());
+        holder.txtmaTV1.setText("Mã TV: "+ thanhVien.getMaTV());
+        holder.txttenTV1.setText("Tên TV: "+thanhVien.getHoTenTV());
+        holder.txtnamSinh1.setText("Năm sinh: "+thanhVien.getNamSinh());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     dialogShowUpdate(thanhVien);
@@ -96,14 +97,14 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     }
 
     public class ThanhVienViewHolder extends RecyclerView.ViewHolder {
-        TextView txtmaTV, txttenTV, txtnamSinh;
+        TextView txtmaTV1, txttenTV1, txtnamSinh1;
         ImageButton imgDelete;
         CardView card;
         public ThanhVienViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtmaTV = itemView.findViewById(R.id.txtmaTV);
-            txttenTV = itemView.findViewById(R.id.txttenTV);
-            txtnamSinh = itemView.findViewById(R.id.txtnamSinhTV);
+            txtmaTV1 = itemView.findViewById(R.id.txtmaTV);
+            txttenTV1 = itemView.findViewById(R.id.txttenTV);
+            txtnamSinh1 = itemView.findViewById(R.id.txtnamSinhTV);
             imgDelete = itemView.findViewById(R.id.imgDelete);
             card = itemView.findViewById(R.id.itemTV);
         }

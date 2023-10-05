@@ -19,18 +19,37 @@ public class LoaiSachDao {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
-    public long insert(LoaiSach obj){
+    public boolean insert(String tenloai){
         ContentValues values = new ContentValues();
-        values.put("tenLoai", obj.getTenLoai());
-        return db.insert("LoaiSach", null, values);
+        values.put("tenLoai", tenloai);
+        long check = db.insert("LoaiSach",null,values);
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int updatel(LoaiSach obj){
+    public boolean update(int id, String loaiSach){
         ContentValues values = new ContentValues();
-        values.put("tenLoai", obj.getTenLoai());
-        return db.update("LoaiSach", values, "maLoai=?", new String[]{String.valueOf(obj.getMaLoai())});
+        values.put("tenLoai", loaiSach);
+        long check = db.update("LoaiSach",values,"maLoai = ?", new String[]{String.valueOf(id)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int delete(String id){
-        return db.delete("LoaiSach", "maLoai=?", new String[]{id});
+    public int deleteLS(int id){
+        Cursor cursor = db.rawQuery("select * from Sach where maLoai = ?", new String[]{String.valueOf(id)});
+        if(cursor.getCount() != 0){
+            return -1;
+        }
+        long check = db.delete("LoaiSach","maLoai = ?", new String[]{String.valueOf(id)});
+        if(check == -1){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
     @SuppressLint("Range")

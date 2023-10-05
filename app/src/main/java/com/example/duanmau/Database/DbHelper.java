@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String dbName = "PNLIB";
-    static final int dbVersion = 5;
+    static final int dbVersion = 11;
     public DbHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }
@@ -65,6 +65,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataSqlite.INSERT_LOAI_SACH);
         db.execSQL(DataSqlite.INSERT_SACH);
         db.execSQL(DataSqlite.INSERT_PHIEU_MUON);
+////        db.execSQL("INSERT INTO LoaiSach VALUES (1, 'Thiếu nhi'),(2,'Tình cảm'),(3, 'Giáo khoa')");
+////        db.execSQL("INSERT INTO Sach VALUES (1, 'Hãy đợi đấy', 2500, 1), (2, 'Thằng cuội', 1000, 1), (3, 'Lập trình Android', 2000, 3)");
+////        db.execSQL("INSERT INTO ThuThu VALUES ('thuthu01','Nguyễn Văn Anh','1234','Admin'),('thuthu02','Trần Văn Hùng','123abc','ThuThu')");
+//        db.execSQL("INSERT INTO ThanhVien VALUES (1,'Trần Đức Mạnh','2004')");
+//        //trả sách: 1: đã trả - 0: chưa trả
+////        db.execSQL("INSERT INTO PhieuMuon VALUES (1,'thuthu01',1, 1, 2500, 1, '19/03/2022')," +
+////                "(2,'thuthu01',1, 3, 2000, 0, '19/03/2022')," +
+////                "(3,'thuthu02',2, 1, 2000, 1, '19/03/2022')");
     }
 
     @Override
