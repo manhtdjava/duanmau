@@ -1,22 +1,29 @@
 package com.example.duanmau.Model;
 
-import java.util.Date;
-
 public class PhieuMuon {
     private int maPM;
     private String maTT;
     private int maTV;
     private int maSach;
-    private Date ngay;
-    private int tienThue, traSach;
+    private String ngay;
+    private int giaThue, traSach;
 
-    public PhieuMuon(int maPM, String maTT, int maTV, int maSach, Date ngay, int tienThue, int traSach) {
+    public PhieuMuon(int maPM, String maTT, int maTV, int maSach, String ngay, int giaThue, int traSach) {
         this.maPM = maPM;
         this.maTT = maTT;
         this.maTV = maTV;
         this.maSach = maSach;
         this.ngay = ngay;
-        this.tienThue = tienThue;
+        this.giaThue = giaThue;
+        this.traSach = traSach;
+    }
+
+    public PhieuMuon(String maTT, int maTV, int maSach, String ngay, int giaThue, int traSach) {
+        this.maTT = maTT;
+        this.maTV = maTV;
+        this.maSach = maSach;
+        this.ngay = ngay;
+        this.giaThue = giaThue;
         this.traSach = traSach;
     }
 
@@ -55,20 +62,20 @@ public class PhieuMuon {
         this.maSach = maSach;
     }
 
-    public Date getNgay() {
+    public String getNgay() {
         return ngay;
     }
 
-    public void setNgay(Date ngay) {
+    public void setNgay(String ngay) {
         this.ngay = ngay;
     }
 
     public int getTienThue() {
-        return tienThue;
+        return giaThue;
     }
 
-    public void setTienThue(int tienThue) {
-        this.tienThue = tienThue;
+    public void setTienThue(int giaThue) {
+        this.giaThue = giaThue;
     }
 
     public int getTraSach() {

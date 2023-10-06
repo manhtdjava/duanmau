@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemPM"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="#EAEAEA"
+        android:layout_marginTop="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            >
+            <TextView
+                android:id="@+id/txtmaPM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã tv"
+                android:textSize="18sp"
+                android:textColor="#CC6A6969"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/txttenTVPM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thành viên: "
+                android:layout_below="@id/txtmaPM"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/txttenSachPM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sách: "
+                android:layout_below="@id/txttenTVPM"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/txttienThue2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiền thuê"
+                android:textSize="18sp"
+                android:textColor="#CC6A6969"
+                android:layout_below="@id/txttenSachPM"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/txttienThue2"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <TextView
+                    android:id="@+id/txttrangThai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trạng thái:"
+                    android:textSize="18sp"
+                    android:textColor="#CC6A6969"
+                    />
+                <TextView
+                    android:id="@+id/txtngayThue"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày thuê:"
+                    android:textSize="18sp"
+                    android:textColor="#CC6A6969"
+                    />
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/imgDeletePM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#00FFFFFF"
+                android:layout_marginRight="-20dp"
+                android:src="@drawable/delete" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

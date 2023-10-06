@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/gray_backgroud"
+        android:elevation="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Phiếu Mượn"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/levente"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thành Viên: "
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:textSize="23dp"
+                android:layout_marginTop="11dp"
+                android:textStyle="bold"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/spnThanhVienUpdate"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sách:            "
+                android:layout_marginLeft="10dp"
+                android:textSize="23dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="11dp"
+                android:textStyle="bold"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/spnSachUpdate"/>
+        </LinearLayout>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/edtngatThueUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="Nhập ngày thuê"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/edt_custom" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Đã trả sách"
+            android:textSize="18sp"
+            android:id="@+id/chkcheck"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btncanUpdatePM"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CanCel"
+                android:background="@drawable/btn_custom"
+                android:textSize="24sp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnsubmitUpdatePM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="submit"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_custom"
+                android:textSize="24sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

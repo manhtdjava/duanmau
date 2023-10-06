@@ -18,37 +18,60 @@ import java.util.List;
 public class PhieuMuonDao {
     private SQLiteDatabase db;
     private Context context;
-    SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
+//    SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
 
     public PhieuMuonDao(Context context){
         this.context = context;
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
-    public long insert(PhieuMuon obj){
+    public boolean insert(PhieuMuon obj){
         ContentValues values = new ContentValues();
         values.put("maTT", obj.getMaTT());
         values.put("maTV", obj.getMaTV());
         values.put("maSach", obj.getMaSach());
-        values.put("ngay", sfd.format(obj.getNgay()));
+        values.put("ngay", obj.getNgay());
         values.put("tienThue", obj.getTienThue());
         values.put("traSach", obj.getTraSach());
 
-        return db.insert("PhieuMuon", null, values);
+        long check = db.insert("PhieuMuon",null,values);
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int updatep(PhieuMuon obj){
+    public boolean updatep(int mapm, int matv, int masach,int ngay, int chkcheck){
         ContentValues values = new ContentValues();
-        values.put("maTT", obj.getMaTT());
-        values.put("maTV", obj.getMaTV());
-        values.put("maSach", obj.getMaSach());
-        values.put("ngay", sfd.format(obj.getNgay()));
-        values.put("tienThue", obj.getTienThue());
-        values.put("traSach", obj.getTraSach());
+        values.put("maTV", matv);
+        values.put("maSach", masach);
+        values.put("ngay", ngay);
+        values.put("traSach", chkcheck);
 
-        return db.update("PhieuMuon", values, "maPM=?", new String[]{String.valueOf(obj.getMaPM())});
+        long check = db.update("PhieuMuon",values,"maPM = ?",new String[]{String.valueOf(mapm)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
-    public int delete(String id){
-        return db.delete("PhieuMuon", "maPM=?", new String[]{id});
+    public boolean delete(int id){
+        long check = db.delete("PhieuMuon","maPM = ?",new String[]{String.valueOf(id)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public boolean updateTrangThai(int mapm){
+        ContentValues values = new ContentValues();
+        values.put("traSach",1);
+        long check = db.update("PhieuMuon",values,"maPM = ?",new String[]{String.valueOf(mapm)});
+        if(check == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     @SuppressLint("Range")
@@ -61,12 +84,8 @@ public class PhieuMuonDao {
             obj.setMaTT(cursor.getString(cursor.getColumnIndex("maTT")));
             obj.setMaTV(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maTV"))));
             obj.setMaSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maSach"))));
-            obj.setTienThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("tienThue"))));
-            try{
-                obj.setNgay(sfd.parse(cursor.getString(cursor.getColumnIndex("ngay"))));
-            }catch (ParseException e){
-                e.printStackTrace();
-            }
+            obj.setTienThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("giaThue"))));
+            obj.setNgay(cursor.getString(cursor.getColumnIndex("ngay")));
             obj.setTraSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("traSach"))));
             list.add(obj);
         }

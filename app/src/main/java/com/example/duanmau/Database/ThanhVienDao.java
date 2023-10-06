@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.duanmau.Model.Sach;
 import com.example.duanmau.Model.ThanhVien;
 
 import java.util.ArrayList;

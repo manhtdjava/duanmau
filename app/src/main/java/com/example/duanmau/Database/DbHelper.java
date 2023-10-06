@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String dbName = "PNLIB";
-    static final int dbVersion = 11;
+    static final int dbVersion = 12;
     public DbHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }
@@ -36,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         "maTV INTEGER NOT NULL, " +
                         "maSach INTEGER NOT NULL, " +
                         "ngay DATE NOT NULL, " +
-                        "tienThue INTEGER NOT NULL, " +
+                        "giaThue INTEGER NOT NULL, " +
                         "traSach INTEGER NOT NULL)";
         db.execSQL(createTablePhieuMuon);
         //Tao bang Sach

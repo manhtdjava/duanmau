@@ -11,6 +11,6 @@ public class DataSqlite {
             ;
     public static final String INSERT_SACH = "Insert into Sach( maSach,TenSach, giaThue, maLoai) values" +
             "('1','Tiếng anh cơ bản', '10000','1')";
-    public static final String INSERT_PHIEU_MUON = "Insert into PhieuMuon(maTT, maTV, maSach ,ngay ,tienThue, traSach) values" +
-            "('tt1', '1','1','2023/10/7' ,'2000', 0 )";
+    public static final String INSERT_PHIEU_MUON = "Insert into PhieuMuon(maTT, maTV, maSach ,ngay ,giaThue, traSach) values" +
+            "('tt1', '1','1','2023/10/7' ,'10000', 0 )";
 }
