@@ -2,50 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     >
     <androidx.cardview.widget.CardView
         android:id="@+id/itemLoaiSach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="#EAEAEA"
-        android:layout_marginTop="10dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="15dp"
             >
+
             <TextView
-                android:id="@+id/txtmaLoaiSach"
+                android:id="@+id/txtmaTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mã Sách"
-                android:textSize="18sp"
-                android:textColor="#CC6A6969"
-                />
-            <TextView
-                android:layout_marginTop="5dp"
-                android:id="@+id/txttenLoaiSach"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tên tv: "
-                android:layout_below="@id/txtmaLoaiSach"
-                android:textSize="18sp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="STT"
                 android:textColor="@color/black"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên Sách"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tenSachTop"
                 />
 
-            <ImageButton
-                android:id="@+id/imgDeleteLoaiSach"
+            <TextView
+                android:id="@+id/soluong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:backgroundTint="#00FFFFFF"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="-20dp"
-                android:src="@drawable/delete" />
+                android:layout_alignParentRight="true"
+                android:text="Số Lượng"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
         </RelativeLayout>
 
+
     </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccc"
+        />
 </LinearLayout>

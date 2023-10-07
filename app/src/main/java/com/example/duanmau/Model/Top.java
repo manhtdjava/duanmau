@@ -1,6 +1,7 @@
 package com.example.duanmau.Model;
 
 public class Top {
+
     private String tenSach;
     private int soLuong;
 
