@@ -9,11 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.duanmau.Fragment.DoanhThuFragment;
 import com.example.duanmau.Fragment.DoiMatKhauFragment;
@@ -23,6 +26,7 @@ import com.example.duanmau.Fragment.SachFragment;
 import com.example.duanmau.Fragment.ThanhVienFragment;
 import com.example.duanmau.Fragment.Top10Fragment;
 import com.example.duanmau.Login.Loading;
+import com.example.duanmau.Login.Login;
 import com.example.duanmau.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int FRAGMENT_TOP10 = 4;
     private static final int FRAGMENT_DOANHTHU = 5;
     private static final int FRAGMENT_DOIMATKHAU = 6;
+    private static final int FRAGMENT_DangXuat = 6;
 
     private int mCurrentFragment = FRAGMENT_PHIEUMUON;
     Toolbar toolbar;
@@ -131,6 +136,22 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new DoiMatKhauFragment());
                         mCurrentFragment = FRAGMENT_DOIMATKHAU;
                     }
+                }else if (item.getItemId() == R.id.logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Delete");
+                    builder.setMessage("Bạn chắc chắn muốn đăng xuất");
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(MainActivity.this, Login.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    builder.setNegativeButton("Hủy",null);
+                    builder.create().show();
+
+                ///
                 }
                 return true;
             }
