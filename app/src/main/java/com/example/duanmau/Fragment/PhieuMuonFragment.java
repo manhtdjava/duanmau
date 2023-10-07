@@ -89,12 +89,12 @@ public class PhieuMuonFragment extends Fragment {
                     Toast.makeText(getContext(), "Bạn không được để trống!!!", Toast.LENGTH_SHORT).show();
                 } else {
                     HashMap<String, Object> hsTV = (HashMap<String, Object>) spnTV.getSelectedItem();
-                    int matv = (int) hsTV.get("MaTV");
+                    int matv = (int) hsTV.get("maTV");
                     HashMap<String, Object> hsSach = (HashMap<String, Object>) spnSach.getSelectedItem();
-                    int masach = (int) hsSach.get("MaSach");
-                    int tien = (int) hsSach.get("GiaThue");
+                    int masach = (int) hsSach.get("maSach");
+                    int tien = (int) hsSach.get("giaThue");
 
-                    AddPM(matv,masach,tien);
+                    AddPM(matv,masach, tien);
                     dialog.dismiss();
 
                 }
@@ -128,7 +128,7 @@ public class PhieuMuonFragment extends Fragment {
     }
     private void getDataThanhVien(Spinner spnThanhVien){
         ThanhVienDao thanhVienDao = new ThanhVienDao(getContext());
-        List<ThanhVien> list = thanhVienDao.getDSThanhVien();
+        List<ThanhVien> list = thanhVienDao.getAll();
 
         ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
         for(ThanhVien tv : list){

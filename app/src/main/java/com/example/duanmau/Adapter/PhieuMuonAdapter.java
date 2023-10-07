@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
 
         //thành viên
         ThanhVienDao thanhVienDao = new ThanhVienDao(context);
-        ThanhVien thanhVien = thanhVienDao.getDSThanhVien().get(phieuMuon.getMaTV());
+        ThanhVien thanhVien = thanhVienDao.getID(String.valueOf(phieuMuon.getMaTV()));
         holder.txttenTV.setText("Thành viên: "+ thanhVien.getHoTenTV());
 
         //ten sách
@@ -170,9 +171,9 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                 } else {
                     int status;
                     HashMap<String, Object> hsTV = (HashMap<String, Object>) spnTV.getSelectedItem();
-                    int matv = (int) hsTV.get("MaTV");
+                    int matv = (int) hsTV.get("maTV");
                     HashMap<String, Object> hsSach = (HashMap<String, Object>) spnSach.getSelectedItem();
-                    int masach = (int) hsSach.get("MaSach");
+                    int masach = (int) hsSach.get("maSach");
                     int id = phieuMuon.getMaPM();
                     String ngaythue = edtngay.getText().toString();
 
@@ -182,7 +183,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                         status = 0;
                     }
 
-                    boolean check = dao.updatep(id,matv,masach,status, Integer.parseInt(ngaythue));
+                    boolean check = dao.updatep(id,matv,masach,status, ngaythue);
                     if(check){
                         loadData();
                         Toast.makeText(context, "Update mã phiếu thành công", Toast.LENGTH_SHORT).show();
@@ -206,7 +207,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
     }
     private void getDataThanhVien(Spinner spnThanhVien){
         ThanhVienDao thanhVienDao = new ThanhVienDao(context);
-        List<ThanhVien> list = thanhVienDao.getDSThanhVien();
+        List<ThanhVien> list = thanhVienDao.getAll();
 
         ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
         for(ThanhVien tv : list){

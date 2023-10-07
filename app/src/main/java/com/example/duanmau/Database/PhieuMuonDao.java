@@ -31,7 +31,7 @@ public class PhieuMuonDao {
         values.put("maTV", obj.getMaTV());
         values.put("maSach", obj.getMaSach());
         values.put("ngay", obj.getNgay());
-        values.put("tienThue", obj.getTienThue());
+        values.put("giaThue", obj.getTienThue());
         values.put("traSach", obj.getTraSach());
 
         long check = db.insert("PhieuMuon",null,values);
@@ -41,14 +41,14 @@ public class PhieuMuonDao {
             return true;
         }
     }
-    public boolean updatep(int mapm, int matv, int masach,int ngay, int chkcheck){
+    public boolean updatep(int maPM, int matv, int masach, int chkcheck, String ngay){
         ContentValues values = new ContentValues();
         values.put("maTV", matv);
         values.put("maSach", masach);
         values.put("ngay", ngay);
         values.put("traSach", chkcheck);
 
-        long check = db.update("PhieuMuon",values,"maPM = ?",new String[]{String.valueOf(mapm)});
+        long check = db.update("PhieuMuon",values,"maPM = ?",new String[]{String.valueOf(maPM)});
         if(check == -1){
             return false;
         }else{

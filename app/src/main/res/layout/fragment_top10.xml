@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Top10Fragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".Fragment.Top10Fragment"
+    android:layout_marginHorizontal="10dp"
+    >
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STT"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên Sách"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txt1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số Lượng"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvtop10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Top 10" />
+        android:layout_below="@+id/txt1"
+        android:layout_marginTop="5dp"
+        />
 
-</FrameLayout>
+
+</RelativeLayout>

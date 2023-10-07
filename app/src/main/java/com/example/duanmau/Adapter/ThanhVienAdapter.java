@@ -158,7 +158,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     }
     private void loadData(){
         list.clear();
-        list = thanhVienDao.getDSThanhVien();
+        list = thanhVienDao.getAll();
         notifyDataSetChanged();
     }
 

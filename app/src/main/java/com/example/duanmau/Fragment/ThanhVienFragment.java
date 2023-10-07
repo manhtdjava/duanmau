@@ -54,7 +54,7 @@ public class ThanhVienFragment extends Fragment {
         return view;
     }
     void getData(){
-        list = thanhVienDao.getDSThanhVien();
+        list = thanhVienDao.getAll();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcyThanhVien.setLayoutManager(linearLayoutManager);
         adapter = new ThanhVienAdapter(getContext(), list);
