@@ -19,10 +19,11 @@ public class SachDao {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
-    public boolean insert(String tensach, int tienthue, int maloai){
+    public boolean insert(String tensach, int tienthue,int nxb ,int maloai){
         ContentValues values = new ContentValues();
         values.put("tenSach",tensach);
         values.put("giaThue",tienthue);
+        values.put("nxb",nxb);
         values.put("maLoai",maloai);
         long check = db.insert("Sach",null,values);
         if(check == -1){
@@ -31,10 +32,11 @@ public class SachDao {
             return true;
         }
     }
-    public boolean update(int masach, String tensach, int giathue, int maloai){
+    public boolean update(int masach, String tensach, int giathue,int nxb, int maloai){
         ContentValues values = new ContentValues();
         values.put("tenSach",tensach);
         values.put("giaThue",giathue);
+        values.put("nxb",nxb);
         values.put("maLoai",maloai);
         long check = db.update("Sach",values,"maSach = ?", new String[]{String.valueOf(masach)});
         if(check == -1){

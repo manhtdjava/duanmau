@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String dbName = "PNLIB";
-    static final int dbVersion = 14;
+    static final int dbVersion = 15;
     public DbHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }
@@ -45,6 +45,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         "maSach INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "tenSach TEXT NOT NULL, " +
                         "giaThue INTEGER NOT NULL, " +
+                        "nxb INTEGER NOT NULL, " +
                         "maLoai INTEGER NOT NULL)";
         db.execSQL(createTableSach);
         //Tao bang Loai Sach

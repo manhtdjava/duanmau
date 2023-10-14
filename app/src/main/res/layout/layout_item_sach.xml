@@ -36,6 +36,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 />
+
             <TextView
                 android:layout_marginTop="5dp"
                 android:id="@+id/txtgiaThue"
@@ -48,14 +49,25 @@
                 />
             <TextView
                 android:layout_marginTop="5dp"
-                android:id="@+id/txtloaiSach"
+                android:id="@+id/txtnxb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loại sách: "
+                android:text="NXB: "
                 android:layout_below="@id/txtgiaThue"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtloaiSach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loại sách: "
+                android:layout_below="@id/txtnxb"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+
             <ImageButton
                 android:id="@+id/imgDeleteSach"
                 android:layout_width="wrap_content"

@@ -4,12 +4,14 @@ public class Sach {
     private int mSach;
     private String tenSach;
     private int giaThue, maLoai;
+    private int nxb;
 
-    public Sach(int mSach, String tenSach, int giaThue, int maLoai) {
+    public Sach(int mSach, String tenSach, int giaThue, int maLoai, int nxb) {
         this.mSach = mSach;
         this.tenSach = tenSach;
         this.giaThue = giaThue;
         this.maLoai = maLoai;
+        this.nxb = nxb;
     }
 
     public Sach() {
@@ -45,5 +47,13 @@ public class Sach {
 
     public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public int getNxb() {
+        return nxb;
+    }
+
+    public void setNxb(int nxb) {
+        this.nxb = nxb;
     }
 }

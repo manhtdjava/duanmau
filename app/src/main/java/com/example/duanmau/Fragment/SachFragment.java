@@ -81,6 +81,7 @@ public class SachFragment extends Fragment {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         EditText edtten = dialog.findViewById(R.id.edttenSach);
         EditText edtgiathue = dialog.findViewById(R.id.edtGiaThue);
+        EditText edtnxb = dialog.findViewById(R.id.edtnxb);
         Spinner spnSach = dialog.findViewById(R.id.spnSachadd);
         Button btnsubmit = dialog.findViewById(R.id.btnsubmitaddSach);
         Button btncancle = dialog.findViewById(R.id.btncanaddSach);
@@ -101,11 +102,12 @@ public class SachFragment extends Fragment {
                 } else {
                     String hoten = edtten.getText().toString();
                     String giathue = edtgiathue.getText().toString();
+                    String nxb = edtnxb.getText().toString();
                     HashMap<String, Object> hs = (HashMap<String, Object>) spnSach.getSelectedItem();
                     int maloai = (int) hs.get("maLoai");
 
                     int tien = Integer.parseInt(giathue);
-                    boolean check = dao.insert(hoten,tien,maloai);
+                    boolean check = dao.insert(hoten,tien, Integer.parseInt(nxb),maloai);
                     if(check){
                         loadData();
                         Toast.makeText(getContext(), "Thêm thành công sách", Toast.LENGTH_SHORT).show();
@@ -121,6 +123,7 @@ public class SachFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 edtten.setText("");
+                edtgiathue.setText("");
                 edtgiathue.setText("");
             }
         });

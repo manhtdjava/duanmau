@@ -63,6 +63,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
         holder.txtma.setText("Mã sách: " + sach.getmSach());
         holder.txtten.setText("Tên sách: " + sach.getTenSach());
         holder.txtgiaThue.setText("Giá thuê: " + sach.getGiaThue());
+        holder.txtnxb.setText("NBX: " + sach.getNxb());
         holder.txtloaiSach.setText("Loại sách: " + loaiSach.getTenLoai());
 
         holder.imgdelete.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +110,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
     }
 
     public class SachViewHolder extends RecyclerView.ViewHolder {
-        TextView txtma, txtten, txtgiaThue, txtloaiSach;
+        TextView txtma, txtten, txtgiaThue, txtloaiSach, txtnxb;
         ImageButton imgdelete;
         CardView itemSach;
 
@@ -121,6 +122,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
             txtloaiSach = itemView.findViewById(R.id.txtloaiSach);
             itemSach = itemView.findViewById(R.id.itemSach);
             imgdelete = itemView.findViewById(R.id.imgDeleteSach);
+            txtnxb = itemView.findViewById(R.id.txtnxb);
         }
     }
 
@@ -135,12 +137,14 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         EditText edtten = dialog.findViewById(R.id.edttenSachUpdate);
         EditText edtgiathue = dialog.findViewById(R.id.edtGiaThueUpdate);
+        EditText edtnxb = dialog.findViewById(R.id.edtnxbupdate);
         Spinner spnSach = dialog.findViewById(R.id.spnSachupdate);
         Button btnsubmit = dialog.findViewById(R.id.btnsubmiupdatetSach);
         Button btncancle = dialog.findViewById(R.id.btncanupdateSach);
 
         edtten.setText(sach.getTenSach());
         edtgiathue.setText(String.valueOf(sach.getGiaThue()));
+        edtnxb.setText(String.valueOf(sach.getNxb()));
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(
                 context,
@@ -169,10 +173,11 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
                 } else {
                     String hoten = edtten.getText().toString();
                     String giathue = edtgiathue.getText().toString();
+                    String nxb = edtnxb.getText().toString();
                     HashMap<String, Object> hs = (HashMap<String, Object>) spnSach.getSelectedItem();
                     int maloai = (int) hs.get("maLoai");
                     int tien = Integer.parseInt(giathue);
-                    boolean check = sachDao.update(sach.getmSach(), hoten, tien, maloai);
+                    boolean check = sachDao.update(sach.getmSach(), hoten, tien, Integer.parseInt(nxb),maloai);
                     if (check) {
                         loadData();
                         Toast.makeText(context, "Cập nhật thành công sách", Toast.LENGTH_SHORT).show();
@@ -190,6 +195,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
             public void onClick(View view) {
                 edtten.setText("");
                 edtgiathue.setText("");
+                edtnxb.setText("");
             }
         });
         dialog.show();
