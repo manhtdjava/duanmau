@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Welcome"/>
         <TextView
+            android:id="@+id/tv_username"
             android:textColor="@color/white"
             android:layout_marginLeft="3dp"
             android:textStyle="bold"

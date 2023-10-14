@@ -2,7 +2,7 @@ package com.example.duanmau.Database;
 
 public class DataSqlite {
     public static final String INSERT_THU_THU = "Insert into ThuThu(MaTT, HoTen, MatKhau) values " +
-            "('tt1', 'manh', '1911')";
+            "('admin', 'manh', 'admin')";
     public static final String INSERT_THANH_VIEN = "Insert into ThanhVien(maTV ,hoTen, namSinh) values" +
             "('1','Trần Đức Mạnh', '2004')"
             ;

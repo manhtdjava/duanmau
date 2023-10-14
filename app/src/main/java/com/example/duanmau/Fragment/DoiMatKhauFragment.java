@@ -70,12 +70,12 @@ public class DoiMatKhauFragment extends Fragment {
     }
     public int validate(){
         int check = 1;
-        if (edtpasscu.getText().length() ==0 || edtpassmoi.getText().length()==0|| edtpassconfirm.getText().length()==0){
+        if (edtpasscu.getText().length() == 0 || edtpassmoi.getText().length()==0|| edtpassconfirm.getText().length()==0){
             Toast.makeText(getContext(), "Bạn phải nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             check = -1;
         }else {
             SharedPreferences preferences = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
-            String passold = preferences.getString("PASS", "");
+            String passold = preferences.getString("PASSWORD", "");
             String pass = edtpassmoi.getText().toString();
             String passconfirm = edtpassconfirm.getText().toString();
             if (!passold.equals(edtpasscu.getText().toString())){

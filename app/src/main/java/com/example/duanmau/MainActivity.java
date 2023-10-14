@@ -16,8 +16,9 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.example.duanmau.Database.ThuThuDao;
 import com.example.duanmau.Fragment.DoanhThuFragment;
 import com.example.duanmau.Fragment.DoiMatKhauFragment;
 import com.example.duanmau.Fragment.LoaiSachFragment;
@@ -25,9 +26,10 @@ import com.example.duanmau.Fragment.PhieuMuonFragment;
 import com.example.duanmau.Fragment.SachFragment;
 import com.example.duanmau.Fragment.ThanhVienFragment;
 import com.example.duanmau.Fragment.Top10Fragment;
-import com.example.duanmau.Login.Loading;
+import com.example.duanmau.Fragment.TaoTaiKhoanFragment;
+
 import com.example.duanmau.Login.Login;
-import com.example.duanmau.R;
+import com.example.duanmau.Model.ThuThu;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,20 +39,21 @@ public class MainActivity extends AppCompatActivity {
     private static final int FRAGMENT_THANHVIEN = 3;
     private static final int FRAGMENT_TOP10 = 4;
     private static final int FRAGMENT_DOANHTHU = 5;
-    private static final int FRAGMENT_DOIMATKHAU = 6;
-    private static final int FRAGMENT_DangXuat = 6;
+    private static final int FRAGMENT_TaoTK = 6;
+    private static final int FRAGMENT_DOIMATKHAU = 7;
+
 
     private int mCurrentFragment = FRAGMENT_PHIEUMUON;
     Toolbar toolbar;
     DrawerLayout drawerLayout_home;
     NavigationView navigationView_home;
-    Handler handler;
     String[] title = {"Quản lý Phiếu mượn",
             "Quản lý Loại sách",
             "Quản lý Sách",
             "Quản lý Thành viên",
             "Top 10 Sách mượn nhiều nhất",
-            "Doanh thu", "Đổi mật khẩu"};
+            "Doanh thu","Tạo tài khoản" ,"Đổi mật khẩu"};
+    TextView tv_username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         findID();
 
-//        handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MainActivity.this, Loading.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        },3000);
+
 
         navigationView_home();
         navigationView_home.setItemTextColor(ColorStateList.valueOf(getColor(R.color.black)));
@@ -89,6 +84,21 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout_home,new PhieuMuonFragment());
         fragmentTransaction.commit();
         drawerLayout_home.close();
+
+        showInf();
+    }
+
+    private void showInf() {
+        ThuThuDao thuThuDAO = new ThuThuDao(MainActivity.this);
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("USERNAME");
+
+        if (!username.equals("admin")) {
+            ThuThu thuThu = thuThuDAO.getID(username);
+            tv_username.setText(thuThu.getHoTen());
+
+            navigationView_home.getMenu().findItem(R.id.createAccount).setVisible(false);
+        }
     }
     private void navigationView_home() {
         navigationView_home.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -130,12 +140,19 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new DoanhThuFragment());
                         mCurrentFragment = FRAGMENT_DOANHTHU;
                     }
-                }else if (item.getItemId() == R.id.changePassword) {
+                }else if (item.getItemId() == R.id.createAccount) {
                     toolbar.setTitle(title[6]);
+                    if (mCurrentFragment != FRAGMENT_TaoTK) {
+                        replaceFragment(new TaoTaiKhoanFragment());
+                        mCurrentFragment = FRAGMENT_TaoTK;
+                    }
+                }else if (item.getItemId() == R.id.changePassword) {
+                    toolbar.setTitle(title[7]);
                     if (mCurrentFragment != FRAGMENT_DOIMATKHAU) {
                         replaceFragment(new DoiMatKhauFragment());
                         mCurrentFragment = FRAGMENT_DOIMATKHAU;
                     }
+
                 }else if (item.getItemId() == R.id.logout) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("Delete");
@@ -169,5 +186,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout_home = findViewById(R.id.drawerLayout_home);
 
         navigationView_home = findViewById(R.id.navigationView_home);
+        tv_username = navigationView_home.getHeaderView(0).findViewById(R.id.tv_username);
     }
 }

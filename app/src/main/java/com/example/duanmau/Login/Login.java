@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         remember(name, pass, binding.checkBox.isChecked());
                         Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("user", name);
+                        intent.putExtra("USERNAME", name);
                         startActivity(intent);
                         finish();
                     }else{
