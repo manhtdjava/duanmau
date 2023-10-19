@@ -7,11 +7,40 @@
     tools:context=".Fragment.SachFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tăng dần"
+        android:id="@+id/tang"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:background="@color/levente"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:paddingHorizontal="10dp"
+        />
+
+    <Button
+        android:id="@+id/giam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="Giảm dần"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:background="@color/levente"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:paddingHorizontal="10dp"
+        />
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/tang"
         android:id="@+id/rcySach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

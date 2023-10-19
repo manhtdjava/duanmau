@@ -28,6 +28,8 @@ import com.example.duanmau.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class SachFragment extends Fragment {
     SachDao dao;
     SachApdater apdater;
     List<Sach> list;
+    Button btntang, btngiam;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +49,8 @@ public class SachFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sach, container, false);
         fab = view.findViewById(R.id.fabSach);
         rcv = view.findViewById(R.id.rcySach);
+        btntang = view.findViewById(R.id.tang);
+        btngiam = view.findViewById(R.id.giam);
         dao = new SachDao(getContext());
         loadData();
 
@@ -55,6 +60,43 @@ public class SachFragment extends Fragment {
                     dialogShowAddd();
             }
         });
+
+        btntang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(list, new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach o1, Sach o2) {
+                        if (o1.getGiaThue() > o1.getGiaThue()){
+                            return 1;
+                        }else {
+                            if (o1.getGiaThue() == o2.getGiaThue()){
+                                return 0;
+                            }else return -1;
+                        }
+                    }
+                });
+            }
+        });
+
+        btngiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(list, new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach o1, Sach o2) {
+                        if (o1.getGiaThue() < o1.getGiaThue()){
+                            return 1;
+                        }else {
+                            if (o1.getGiaThue() == o2.getGiaThue()){
+                                return 0;
+                            }else return -1;
+                        }
+                    }
+                });
+            }
+        });
+
         return view;
     }
     private ArrayList<HashMap<String , Object>> getDSLoaiSach(){
