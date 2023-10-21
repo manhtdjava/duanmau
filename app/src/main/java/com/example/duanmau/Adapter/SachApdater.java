@@ -13,6 +13,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -31,18 +33,22 @@ import com.example.duanmau.Model.ThanhVien;
 import com.example.duanmau.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder> {
+public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder> implements Filterable {
     Context context;
     List<Sach> list;
+    List<Sach> listOld;
     SachDao sachDao;
     private ArrayList<HashMap<String, Object>> listHM;
 
     public SachApdater(Context context, List<Sach> list, ArrayList<HashMap<String, Object>> listHM) {
         this.context = context;
         this.list = list;
+        this.listOld = list;
         sachDao = new SachDao(context);
         this.listHM = listHM;
     }
@@ -63,7 +69,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
         holder.txtma.setText("Mã sách: " + sach.getmSach());
         holder.txtten.setText("Tên sách: " + sach.getTenSach());
         holder.txtgiaThue.setText("Giá thuê: " + sach.getGiaThue());
-        holder.txtnxb.setText("NBX: " + sach.getNxb());
+        holder.txtnxb.setText("NXB: " + sach.getNxb());
         holder.txtloaiSach.setText("Loại sách: " + loaiSach.getTenLoai());
 
         holder.imgdelete.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +115,36 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
         return list.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String sert = charSequence.toString();
+                if (sert.isEmpty()){
+                    list = listOld;
+                }else {
+                    List<Sach> list1 = new ArrayList<>();
+                    for (Sach sach : listOld){
+                        if (sach.getTenSach().toLowerCase().contains(sert.toLowerCase())){
+                            list1.add(sach);
+                        }
+                    }
+                    list = list1;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                list = (List<Sach>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public class SachViewHolder extends RecyclerView.ViewHolder {
         TextView txtma, txtten, txtgiaThue, txtloaiSach, txtnxb;
         ImageButton imgdelete;
@@ -125,7 +161,38 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
             txtnxb = itemView.findViewById(R.id.txtnxb);
         }
     }
-
+    public void sort(){
+        Collections.sort(list, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach o1, Sach o2) {
+                if (o1.getGiaThue() > o2.getGiaThue()){
+                    Toast.makeText(context, "Đã sắp xếp tăng dần", Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                    return 1;
+                }else {
+                    if (o1.getGiaThue() == o2.getGiaThue()){
+                        return 0;
+                    }else return -1;
+                }
+            }
+        });
+    }
+    public void sort2(){
+        Collections.sort(list, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach o1, Sach o2) {
+                if (o1.getGiaThue() < o2.getGiaThue()){
+                    Toast.makeText(context, "Đã sắp xếp giảm dần", Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                    return 1;
+                }else {
+                    if (o1.getGiaThue() == o2.getGiaThue()){
+                        return 0;
+                    }else return -1;
+                }
+            }
+        });
+    }
     public void dialogShowUpdate(Sach sach) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_updatesach);
@@ -200,6 +267,7 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
         });
         dialog.show();
     }
+
         private void loadData () {
             list.clear();
             list = sachDao.getAll();

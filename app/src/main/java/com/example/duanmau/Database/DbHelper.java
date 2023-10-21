@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String dbName = "PNLIB";
-    static final int dbVersion = 15;
+    static final int dbVersion = 16;
     public DbHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }

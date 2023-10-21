@@ -8,10 +8,19 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <SearchView
+
+        android:layout_marginTop="10dp"
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tăng dần"
+        android:layout_below="@id/search_bar"
         android:id="@+id/tang"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="25dp"
@@ -22,6 +31,8 @@
         />
 
     <Button
+
+        android:layout_below="@id/search_bar"
         android:id="@+id/giam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

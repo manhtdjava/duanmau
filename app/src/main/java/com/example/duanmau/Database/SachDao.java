@@ -67,6 +67,7 @@ public class SachDao {
             obj.setmSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maSach"))));
             obj.setTenSach(cursor.getString(cursor.getColumnIndex("tenSach")));
             obj.setGiaThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("giaThue"))));
+            obj.setNxb(Integer.parseInt(cursor.getString(cursor.getColumnIndex("nxb"))));
             obj.setMaLoai(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maLoai"))));
 
             list.add(obj);

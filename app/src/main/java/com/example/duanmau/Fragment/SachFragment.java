@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class SachFragment extends Fragment {
     SachApdater apdater;
     List<Sach> list;
     Button btntang, btngiam;
+    SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +53,23 @@ public class SachFragment extends Fragment {
         rcv = view.findViewById(R.id.rcySach);
         btntang = view.findViewById(R.id.tang);
         btngiam = view.findViewById(R.id.giam);
+        searchView = view.findViewById(R.id.search_bar);
         dao = new SachDao(getContext());
         loadData();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                apdater.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String text) {
+                apdater.getFilter().filter(text);
+                return false;
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,36 +81,14 @@ public class SachFragment extends Fragment {
         btntang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Collections.sort(list, new Comparator<Sach>() {
-                    @Override
-                    public int compare(Sach o1, Sach o2) {
-                        if (o1.getGiaThue() > o1.getGiaThue()){
-                            return 1;
-                        }else {
-                            if (o1.getGiaThue() == o2.getGiaThue()){
-                                return 0;
-                            }else return -1;
-                        }
-                    }
-                });
+                apdater.sort();
             }
         });
 
         btngiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Collections.sort(list, new Comparator<Sach>() {
-                    @Override
-                    public int compare(Sach o1, Sach o2) {
-                        if (o1.getGiaThue() < o1.getGiaThue()){
-                            return 1;
-                        }else {
-                            if (o1.getGiaThue() == o2.getGiaThue()){
-                                return 0;
-                            }else return -1;
-                        }
-                    }
-                });
+               apdater.sort2();
             }
         });
 
@@ -177,5 +172,7 @@ public class SachFragment extends Fragment {
         rcv.setLayoutManager(layoutManager);
         apdater = new SachApdater(getContext(),list, getDSLoaiSach());
         rcv.setAdapter(apdater);
+        apdater.notifyDataSetChanged();
     }
+
 }
