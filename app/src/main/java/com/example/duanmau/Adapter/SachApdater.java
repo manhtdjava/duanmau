@@ -161,38 +161,78 @@ public class SachApdater extends RecyclerView.Adapter<SachApdater.SachViewHolder
             txtnxb = itemView.findViewById(R.id.txtnxb);
         }
     }
+//    public void sort(){
+//        Collections.sort(list, new Comparator<Sach>() {
+//            @Override
+//            public int compare(Sach o1, Sach o2) {
+//                if (o1.getGiaThue() > o2.getGiaThue()){
+//                    Toast.makeText(context, "Đã sắp xếp tăng dần", Toast.LENGTH_SHORT).show();
+//                    notifyDataSetChanged();
+//                    return 1;
+//                }else {
+//                    if (o1.getGiaThue() == o2.getGiaThue()){
+//                        return 0;
+//                    }else return -1;
+//                }
+//            }
+//        });
+//    }
+//    public void sort2(){
+//        Collections.sort(list, new Comparator<Sach>() {
+//            @Override
+//            public int compare(Sach o1, Sach o2) {
+//                if (o1.getGiaThue() < o2.getGiaThue()){
+//                    Toast.makeText(context, "Đã sắp xếp giảm dần", Toast.LENGTH_SHORT).show();
+//                    notifyDataSetChanged();
+//                    return 1;
+//                }else {
+//                    if (o1.getGiaThue() == o2.getGiaThue()){
+//                        return 0;
+//                    }else return -1;
+//                }
+//            }
+//        });
+//    }
     public void sort(){
         Collections.sort(list, new Comparator<Sach>() {
             @Override
             public int compare(Sach o1, Sach o2) {
-                if (o1.getGiaThue() > o2.getGiaThue()){
+                String[] n1, n2;
+                n1 = o1.getTenSach().split("");
+                n2= o2.getTenSach().split("");
+                String s1 = n1[n1.length-1];
+                String s2= n2[n2.length-1];
+                if (s1.codePointAt(0) > s2.codePointAt(0)){
                     Toast.makeText(context, "Đã sắp xếp tăng dần", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                     return 1;
-                }else {
-                    if (o1.getGiaThue() == o2.getGiaThue()){
-                        return 0;
-                    }else return -1;
                 }
+                else return -1;
+
             }
         });
-    }
+}
     public void sort2(){
         Collections.sort(list, new Comparator<Sach>() {
             @Override
             public int compare(Sach o1, Sach o2) {
-                if (o1.getGiaThue() < o2.getGiaThue()){
+                String[] n1, n2;
+                n1 = o1.getTenSach().split("");
+                n2= o2.getTenSach().split("");
+                String s1 = n1[n1.length-1];
+                String s2= n2[n2.length-1];
+                if (s1.codePointAt(0) < s2.codePointAt(0)){
                     Toast.makeText(context, "Đã sắp xếp giảm dần", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                     return 1;
-                }else {
-                    if (o1.getGiaThue() == o2.getGiaThue()){
-                        return 0;
-                    }else return -1;
                 }
+                else return -1;
+
             }
         });
     }
+
+
     public void dialogShowUpdate(Sach sach) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_updatesach);
